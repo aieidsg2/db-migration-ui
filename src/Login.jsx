@@ -8,7 +8,7 @@ import {
   
   import { useState } from "react";
   
-  function Login({ onLogin }) {
+  function Login({ users,onLogin }) {
   
     const [username, setUsername] =
       useState("");
@@ -16,17 +16,28 @@ import {
     const [password, setPassword] =
       useState("");
   
-    const handleLogin = () => {
-  
-      if (
-        username === "admin" &&
-        password === "admin123"
-      ) {
-        onLogin();
-      } else {
-        alert("Invalid Credentials");
-      }
-    };
+      const handleLogin = () => {
+
+        console.log("Users:", users);
+        console.log("Entered username:", username);
+        console.log("Entered password:", password);
+      
+        const user = users.find(
+          (u) =>
+            u.username === username &&
+            u.password === password
+        );
+      
+        console.log("Matched user:", user);
+      
+        if (user) {
+          console.log("LOGIN SUCCESS");
+          onLogin();
+        } else {
+          console.log("LOGIN FAILED");
+          alert("Invalid Credentials");
+        }
+      };
   
     return (
       <Box
